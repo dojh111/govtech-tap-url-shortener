@@ -1,0 +1,8 @@
+{
+    "app_name": "URL-SHORTENER-API",
+    "port": 5000,
+    "id_length": 6,
+    "default_url": "http://localhost:",
+    "mongodb_connection_string": "mongodb+srv://danzel:testpassword123@urlshortenercluster.ja8mplr.mongodb.net/test",
+    "db_collection": "url-collection"
+}
