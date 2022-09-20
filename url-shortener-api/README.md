@@ -4,7 +4,7 @@ The url shortener api shortens a provided url, into a shorter version, and retur
 
 This is done by generating a random, unique id for each received URL, and storing it in the database, `MongoDB Cloud`, for retrieval later when queried, where the user will be redirected to the original url.
 
-The backend API is a `Express` application running on, `Node.js`, in `TypeScript` language.
+The backend API is a `Express` application running on, `Node.js`.
 
 ---
 
@@ -15,13 +15,13 @@ The backend API is a `Express` application running on, `Node.js`, in `TypeScript
     |_ default.json (Contains deafult config variables for api)
     |_ test.json (Test config variables)
 |_ models
-    |_ url.model.ts (Mongoose schema for our url object)
+    |_ url.model.js (Mongoose schema for our url object)
 |_ routes
-    |_ index.ts (Route registering)
-    |_ urlShortener.api.ts (Main route handling)
-    |_ urlShortener.ts (URL shortening, MongoDB retrieve/insert)
-|_ app.ts (Main entry point for app)
-|_ dbConnect.ts (Connects to DB. MongoDB Cloud)
+    |_ index.js (Route registering)
+    |_ urlShortener.api.js (Main route handling)
+    |_ urlShortener.js (URL shortening, MongoDB retrieve/insert)
+|_ app.js (Main entry point for app)
+|_ dbConnect.js (Connects to DB. MongoDB Cloud)
 ```
 
 ---
@@ -31,7 +31,7 @@ The backend API is a `Express` application running on, `Node.js`, in `TypeScript
 To run the API locally:
 
 1. `npm install`
-1. `npm run dev` - To start the API server. By default, runs on `localhost:5000`
+1. `npm start` - To start the API server. By default, runs on `localhost:5000`
 
 ---
 
