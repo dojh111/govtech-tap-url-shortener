@@ -1,13 +1,11 @@
-import { Request, Response } from 'express';
-import * as express from 'express';
-import UrlShortener from './urlShortener';
+import UrlShortener from './urlShortener.js';
 import multer from 'multer';
 import config from 'config';
 
 export default class UrlShortenerApi extends UrlShortener {
-    public routes(router: express.Router): void {
+    routes(router) {
         // Retrieve original URL from MongoDB database and redirect user
-        router.get('/:urlCode', async (req: Request, res: Response) => {
+        router.get('/:urlCode', async (req, res) => {
             try {
                 console.log(
                     '[URL - GET ORIGINAL URL] Retrieving original url and redirecting'
@@ -17,7 +15,7 @@ export default class UrlShortenerApi extends UrlShortener {
                 console.log(`[SERVER REDIRECT] Redirecting to: `);
                 console.log(url.originalUrl);
                 res.redirect(url.originalUrl);
-            } catch (e: any) {
+            } catch (e) {
                 console.log('[URL - GET ORIGINAL URL] An error has occured');
                 console.log(e);
                 res.status(500).send('Failed to get URL');
@@ -28,15 +26,20 @@ export default class UrlShortenerApi extends UrlShortener {
         router.post(
             '/url/shorten',
             multer().none(), // Middleware to parse data in body
-            async (req: Request, res: Response) => {
+            async (req, res) => {
                 try {
                     console.log('[URL - POST NEW URL] Shortening URL');
                     const originalUrl = req.body.url;
                     // Request body is valid
                     if (originalUrl) {
                         const url = await this.createShortenedUrl(originalUrl);
-                        const urlCode: string = url.urlCode;
-                        const baseUrl: string = config.get('default_url');
+                        const urlCode = url.urlCode;
+                        let baseUrl = '';
+                        if (process.env.NODE_ENV == 'production') {
+                            baseUrl = config.get('deployment_url');
+                        } else {
+                            baseUrl = config.get('default_url');
+                        }
                         const shortenedUrl = baseUrl + '/' + urlCode;
                         console.log(
                             `[URL SHORTENER] Url ending with: ${shortenedUrl} returned`
@@ -48,7 +51,7 @@ export default class UrlShortenerApi extends UrlShortener {
                         return;
                     }
                     throw new Error('Missing body data');
-                } catch (e: any) {
+                } catch (e) {
                     console.log('[URL - POST NEW URL] An error has occured');
                     console.log(e);
                     res.status(500).send('Failed to shorten URL: ' + e);

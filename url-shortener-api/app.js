@@ -2,8 +2,8 @@ import config from 'config';
 import Express from 'express';
 import Cors from 'cors';
 import Helmet from 'helmet';
-import router from './routes/index';
-import connectToDb from './dbConnect';
+import router from './routes/index.js';
+import connectToDb from './dbConnect.js';
 
 const startServer = async () => {
     try {
@@ -25,7 +25,7 @@ const startServer = async () => {
                 `[SERVER STARTUP - ${appName}] Listening on port: ${port}`
             );
         });
-    } catch (e: any) {
+    } catch (e) {
         console.log(
             '[SERVER ERROR] An error has occurred to the server. Shutting down'
         );
