@@ -39,3 +39,10 @@ To run the URL shortener app locally:
 
 1. `npm install`
 1. `npm start`
+
+## Testing
+
+Unit tests have been written for both BE API, as well as FE apps. To run the tests:
+
+1. `cd` to the respective folders for FE and BE applications
+1. `npm test` to run automated tests
