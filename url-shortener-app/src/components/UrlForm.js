@@ -68,8 +68,10 @@ const UrlForm = () => {
       }
       const formData = new FormData();
       formData.append("url", url);
-      let endpoint = "https://tap-shortify.herokuapp.com/url/shorten";
-
+      let endpoint = "http://localhost:5000/url/shorten";
+      if (process.env.NODE_ENV === "production") {
+        endpoint = "https://tap-shortify.herokuapp.com/url/shorten";
+      }
       const response = await axios.post(endpoint, formData);
       if (response.data && response.data.hasOwnProperty("newUrl")) {
         console.log(response.data.newUrl);

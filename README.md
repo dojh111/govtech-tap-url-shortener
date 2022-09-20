@@ -31,6 +31,7 @@ To run the URL shortener API locally:
 
 1. `npm install`
 1. `npm start`
+1. `http://localhost:5000`
 
 ### URL Shortener App (FE)
 
