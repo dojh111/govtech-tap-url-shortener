@@ -2,11 +2,36 @@ import React from "react";
 import { useState } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import axios from "axios";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const ErrorCard = ({ errorMessage }) => {
   return (
     <div className="error-card-container">
       <text className="error-card-message">{errorMessage}</text>
+    </div>
+  );
+};
+
+const UrlDisplay = ({ newUrl, openInNewTab, isCopied, setIsCopied }) => {
+  const handleCopy = async () => {
+    setIsCopied(true);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 1000);
+  };
+
+  return (
+    <div className="url-input-container">
+      <p className="clickable-text" onClick={() => openInNewTab(newUrl)}>
+        {newUrl}
+      </p>
+      {isCopied ? (
+        <button className="btn-copied">Copied!</button>
+      ) : (
+        <CopyToClipboard text={newUrl} onCopy={() => handleCopy(setIsCopied)}>
+          <button className="btn-copy">Copy</button>
+        </CopyToClipboard>
+      )}
     </div>
   );
 };
@@ -17,6 +42,7 @@ const UrlForm = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isError, setIsError] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const handleSubmit = async (e) => {
     try {
@@ -32,7 +58,8 @@ const UrlForm = () => {
       }
       const formData = new FormData();
       formData.append("url", url);
-      const endpoint = "http://localhost:5000/url/shorten";
+      let endpoint = "https://tap-shortify.herokuapp.com/url/shorten";
+
       const response = await axios.post(endpoint, formData);
       if (response.data && response.data.hasOwnProperty("newUrl")) {
         console.log(response.data.newUrl);
@@ -78,11 +105,14 @@ const UrlForm = () => {
         <text className="url-display-header">Your shortened link</text>
         <div className="url-display-container">
           {newUrl ? (
-            <p className="clickable-text" onClick={() => openInNewTab(newUrl)}>
-              {newUrl}
-            </p>
+            <UrlDisplay
+              newUrl={newUrl}
+              openInNewTab={openInNewTab}
+              isCopied={isCopied}
+              setIsCopied={setIsCopied}
+            />
           ) : (
-            <p>Enter a link above to begin!</p>
+            <p style={{ color: "#bbbbbb" }}>Enter a link above to begin!</p>
           )}
         </div>
       </div>
