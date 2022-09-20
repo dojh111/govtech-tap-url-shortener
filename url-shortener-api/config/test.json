@@ -1,3 +1,4 @@
 {
-    "app_name": "TEST_URL_SHORTENER_API"
+    "app_name": "TEST_URL_SHORTENER_API",
+    "id_length": 12
 }
