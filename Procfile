@@ -1,0 +1,1 @@
+web: node ./url-shortener-api/app.ts
