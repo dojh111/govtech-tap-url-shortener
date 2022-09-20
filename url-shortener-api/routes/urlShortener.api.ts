@@ -36,10 +36,8 @@ export default class UrlShortenerApi extends UrlShortener {
                     if (originalUrl) {
                         const url = await this.createShortenedUrl(originalUrl);
                         const urlCode: string = url.urlCode;
-                        const portNumber: number = config.get('port');
                         const baseUrl: string = config.get('default_url');
-                        const shortenedUrl =
-                            baseUrl + portNumber + '/' + urlCode;
+                        const shortenedUrl = baseUrl + '/' + urlCode;
                         console.log(
                             `[URL SHORTENER] Url ending with: ${shortenedUrl} returned`
                         );

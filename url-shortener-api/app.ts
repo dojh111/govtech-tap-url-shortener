@@ -7,7 +7,7 @@ import connectToDb from './dbConnect';
 
 const startServer = async () => {
     try {
-        const port = config.get('port');
+        const port = process.env.PORT || config.get('port');
         const appName = config.get('app_name');
         const expressApp = Express();
         expressApp.use(Cors());
