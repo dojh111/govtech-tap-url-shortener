@@ -1,9 +1,20 @@
 import React from "react";
 import { useState } from "react";
+import BeatLoader from "react-spinners/BeatLoader";
 
 const UrlForm = () => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      console.log("HELLO");
+      setLoading(false);
+    }, 3000);
+  };
+
   return (
     <div className="shortener-container">
       <form className="add-form">
@@ -17,7 +28,13 @@ const UrlForm = () => {
           />
         </div>
       </form>
-      <button className="btn">Shorten</button>
+      <button className="btn" onClick={handleSubmit}>
+        {loading ? (
+          <BeatLoader color={"#fff"} loading={true} size={6} />
+        ) : (
+          "Shorten"
+        )}
+      </button>
     </div>
   );
 };
