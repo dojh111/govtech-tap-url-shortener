@@ -19,7 +19,8 @@
         "helmet": "^6.0.0",
         "jest": "^29.0.3",
         "mongoose": "^6.6.1",
-        "multer": "^1.4.5-lts.1"
+        "multer": "^1.4.5-lts.1",
+        "supertest": "^6.2.4"
     },
     "devDependencies": {
         "@babel/plugin-transform-modules-commonjs": "^7.18.6",

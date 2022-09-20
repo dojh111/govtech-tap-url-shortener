@@ -25,6 +25,7 @@ const startServer = async () => {
                 `[SERVER STARTUP - ${appName}] Listening on port: ${port}`
             );
         });
+        return server;
     } catch (e) {
         console.log(
             '[SERVER ERROR] An error has occurred to the server. Shutting down'
