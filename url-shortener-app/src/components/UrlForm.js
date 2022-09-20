@@ -58,6 +58,7 @@ const UrlForm = () => {
         setIsError(true);
         return;
       }
+      // Validate if actual URL before storing
       if (!validator.isURL(url)) {
         // Show error card
         setLoading(false);
