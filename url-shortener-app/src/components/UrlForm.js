@@ -3,6 +3,7 @@ import { useState } from "react";
 import BeatLoader from "react-spinners/BeatLoader";
 import axios from "axios";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import validator from "validator";
 
 const ErrorCard = ({ errorMessage }) => {
   return (
@@ -49,10 +50,18 @@ const UrlForm = () => {
       e.preventDefault();
       setLoading(true);
       setIsError(false);
+      setNewUrl("");
       if (!url) {
         // Show error card
         setLoading(false);
         setErrorMessage("Please enter a link!");
+        setIsError(true);
+        return;
+      }
+      if (!validator.isURL(url)) {
+        // Show error card
+        setLoading(false);
+        setErrorMessage("Invalid link. Please enter a valid URL");
         setIsError(true);
         return;
       }
